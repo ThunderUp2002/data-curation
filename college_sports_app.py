@@ -24,10 +24,6 @@ big_ten_teams = all_stats_df[all_stats_df["Team"].isin(p4_conferences["Big Ten"]
 big_12_teams = all_stats_df[all_stats_df["Team"].isin(p4_conferences["Big 12"])]
 sec_teams = all_stats_df[all_stats_df["Team"].isin(p4_conferences["SEC"])]
 
-st.title("College Sports Stats")
-
-overall_tab, football_tab, volleyball_tab, soccer_tab = st.tabs(["Overall", "Football", "W Volleyball", "W Soccer"])
-
 def filter_colleges_by_conferences(df, selected_conferences):
     if not selected_conferences:
         return df
@@ -41,8 +37,11 @@ def filter_colleges_by_conferences(df, selected_conferences):
 def filter_colleges_by_sport(df, cols):
     return df.dropna(subset=cols)
 
+st.title("College Sports Stats")
+
+overall_tab, football_tab, volleyball_tab, soccer_tab = st.tabs(["Overall", "Football", "W Volleyball", "W Soccer"])
+
 with overall_tab:
-    st.header("Overall Stats")
 
     format_option = st.radio(
         "Format",
@@ -116,7 +115,6 @@ with overall_tab:
             st.dataframe(college_df)
 
 with football_tab:
-    st.header("Football Stats")
 
     with st.popover("Select conference(s)"):
         acc = st.checkbox("ACC", key="acc_football_checkbox")
@@ -164,7 +162,6 @@ with football_tab:
         st.dataframe(football_df[["Team"] + football_cols])
 
 with volleyball_tab:
-    st.header("W Volleyball Stats")
 
     with st.popover("Select conference(s)"):
         acc = st.checkbox("ACC", key="acc_volleyball_checkbox")
@@ -212,7 +209,6 @@ with volleyball_tab:
         st.dataframe(volleyball_df[["Team"] + volleyball_cols])
 
 with soccer_tab:
-    st.header("W Soccer Stats")
 
     with st.popover("Select conference(s)"):
         acc = st.checkbox("ACC", key="acc_soccer_checkbox")
